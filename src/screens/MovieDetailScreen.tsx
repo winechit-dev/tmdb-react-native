@@ -89,7 +89,7 @@ const MovieDetailScreen: React.FC<MovieDetailScreenProps> = ({ movie, onBack }) 
           )}
           <View style={styles.backdropOverlay} />
           <TouchableOpacity style={styles.backButton} onPress={onBack}>
-            <Text style={styles.backButtonText}>← Back</Text>
+            <Text style={styles.backButtonText}>Back</Text>
           </TouchableOpacity>
         </View>
 

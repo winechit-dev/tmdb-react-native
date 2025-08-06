@@ -8,12 +8,12 @@ import {
   ActivityIndicator,
   SafeAreaView,
   ScrollView,
-  TouchableOpacity,
 } from 'react-native';
 import { Movie, MovieResponse } from '../types/Movie';
 import { movieService } from '../services/movieService';
 import MovieCard from '../components/MovieCard';
 import SearchBar from '../components/SearchBar';
+import Chip from '../components/Chip';
 
 interface MovieListScreenProps {
   onMoviePress: (movie: Movie) => void;
@@ -130,23 +130,12 @@ const MovieListScreen: React.FC<MovieListScreenProps> = ({ onMoviePress }) => {
         contentContainerStyle={styles.categoriesContent}
       >
         {categories.map((category) => (
-          <TouchableOpacity
+          <Chip
             key={category.key}
-            style={[
-              styles.categoryButton,
-              currentCategory === category.key && styles.activeCategoryButton,
-            ]}
+            title={category.title}
+            isSelected={currentCategory === category.key}
             onPress={() => handleCategoryPress(category.key)}
-          >
-            <Text
-              style={[
-                styles.categoryText,
-                currentCategory === category.key && styles.activeCategoryText,
-              ]}
-            >
-              {category.title}
-            </Text>
-          </TouchableOpacity>
+          />
         ))}
       </ScrollView>
 
@@ -186,28 +175,10 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   categoriesContainer: {
-    maxHeight: 50,
+    minHeight: 50,
   },
   categoriesContent: {
     paddingHorizontal: 15,
-  },
-  categoryButton: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    marginRight: 10,
-    backgroundColor: '#e9ecef',
-    borderRadius: 20,
-  },
-  activeCategoryButton: {
-    backgroundColor: '#007AFF',
-  },
-  categoryText: {
-    fontSize: 14,
-    color: '#333',
-    fontWeight: '500',
-  },
-  activeCategoryText: {
-    color: '#fff',
   },
   listContainer: {
     padding: 15,
@@ -215,6 +186,7 @@ const styles = StyleSheet.create({
   },
   row: {
     justifyContent: 'space-between',
+    gap: 10,
   },
   loadingContainer: {
     flex: 1,
