@@ -1,6 +1,50 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# TMDB React Native Movie App
 
-# Getting Started
+A simple movie database app built with React Native and TypeScript, using The Movie Database (TMDB) API.
+
+## Features
+
+- Browse popular, top-rated, and now playing movies
+- Search for movies
+- View detailed movie information including:
+  - Movie poster and backdrop images
+  - Overview and synopsis
+  - Release date and runtime
+  - Ratings and vote count
+  - Genres
+  - Budget and revenue information
+  - Production companies
+- Responsive grid layout
+- Pull-to-refresh and infinite scrolling
+
+## Setup
+
+### Prerequisites
+
+- React Native development environment set up
+- Node.js and npm/yarn installed
+- Android Studio (for Android) or Xcode (for iOS)
+
+### Installation
+
+1. Clone the repository and navigate to the project directory
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Get your TMDB API key:
+   - Go to [The Movie Database](https://www.themoviedb.org/)
+   - Create an account and log in
+   - Go to Settings > API
+   - Create a new API key (v3 auth)
+
+4. Update the API key in `src/services/movieService.ts`:
+   ```typescript
+   const API_KEY = 'your_actual_api_key_here';
+   ```
+
+## Getting Started
 
 > **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
 

@@ -1,28 +1,38 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
+ * TMDB React Native Movie App
+ * 
  * @format
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import React, { useState } from 'react';
+import { StatusBar, useColorScheme } from 'react-native';
+import { Movie } from './src/types/Movie';
+import MovieListScreen from './src/screens/MovieListScreen';
+import MovieDetailScreen from './src/screens/MovieDetailScreen';
+import ErrorBoundary from './src/components/ErrorBoundary';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+
+  const handleMoviePress = (movie: Movie) => {
+    setSelectedMovie(movie);
+  };
+
+  const handleBackPress = () => {
+    setSelectedMovie(null);
+  };
 
   return (
-    <View style={styles.container}>
+    <ErrorBoundary>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
-    </View>
+      {selectedMovie ? (
+        <MovieDetailScreen movie={selectedMovie} onBack={handleBackPress} />
+      ) : (
+        <MovieListScreen onMoviePress={handleMoviePress} />
+      )}
+    </ErrorBoundary>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;
