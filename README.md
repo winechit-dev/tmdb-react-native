@@ -39,9 +39,13 @@ A simple movie database app built with React Native and TypeScript, using The Mo
    - Go to Settings > API
    - Create a new API key (v3 auth)
 
-4. Update the API key in `src/services/movieService.ts`:
-   ```typescript
-   const API_KEY = 'your_actual_api_key_here';
+4. Setup environment variables:
+   - Copy `.env.example` to `.env`: `cp .env.example .env`
+   - Open `.env` and replace `your_api_key_here` with your actual API key:
+   ```bash
+   TMDB_API_KEY=your_actual_api_key_here
+   TMDB_BASE_URL=https://api.themoviedb.org/3
+   TMDB_IMAGE_BASE_URL=https://image.tmdb.org/t/p
    ```
 
 ## Getting Started

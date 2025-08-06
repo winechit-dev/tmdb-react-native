@@ -30,12 +30,12 @@ const ErrorBoundary: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       <View style={styles.container}>
         <Text style={styles.title}>🔑 API Key Required</Text>
         <Text style={styles.message}>
-          To use this app, you need to set up your TMDB API key.
+          To use this app, you need to set up your TMDB API key in the .env file.
         </Text>
         <Text style={styles.steps}>
           1. Get your free API key from TMDB{'\n'}
-          2. Open src/config.ts{'\n'}
-          3. Replace 'YOUR_API_KEY_HERE' with your key{'\n'}
+          2. Copy .env.example to .env{'\n'}
+          3. Replace 'your_api_key_here' with your key{'\n'}
           4. Restart the app
         </Text>
         <TouchableOpacity

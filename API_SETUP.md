@@ -14,17 +14,21 @@ This app requires a TMDB (The Movie Database) API key to function properly. Foll
 6. Fill out the required information
 7. You'll receive your API key (v3 auth)
 
-### 2. Configure the API Key
+### 2. Configure the Environment Variables
 
-Open `src/config.ts` and replace `YOUR_API_KEY_HERE` with your actual API key:
+1. Copy the example environment file:
+   ```bash
+   cp .env.example .env
+   ```
 
-```typescript
-export const config = {
-  TMDB_API_KEY: 'your_actual_api_key_here', // Replace this
-  TMDB_BASE_URL: 'https://api.themoviedb.org/3',
-  TMDB_IMAGE_BASE_URL: 'https://image.tmdb.org/t/p',
-};
-```
+2. Open `.env` and replace `your_api_key_here` with your actual API key:
+   ```bash
+   TMDB_API_KEY=your_actual_api_key_here
+   TMDB_BASE_URL=https://api.themoviedb.org/3
+   TMDB_IMAGE_BASE_URL=https://image.tmdb.org/t/p
+   ```
+
+**Important**: Never commit your `.env` file to version control. It's already added to `.gitignore`.
 
 ### 3. Test the App
 

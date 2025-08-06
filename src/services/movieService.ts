@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { Movie, MovieResponse, MovieDetails } from '../types/Movie';
-import { config } from '../config';
+import { TMDB_API_KEY, TMDB_BASE_URL, TMDB_IMAGE_BASE_URL } from '@env';
 
 const tmdbApi = axios.create({
-  baseURL: config.TMDB_BASE_URL,
+  baseURL: TMDB_BASE_URL,
   params: {
-    api_key: config.TMDB_API_KEY,
+    api_key: TMDB_API_KEY,
   },
 });
 
@@ -51,7 +51,7 @@ export const movieService = {
   // Helper function to get full image URL
   getImageUrl: (path: string | null, size: string = 'w500'): string | null => {
     if (!path) return null;
-    return `${config.TMDB_IMAGE_BASE_URL}/${size}${path}`;
+    return `${TMDB_IMAGE_BASE_URL}/${size}${path}`;
   },
 };
 
