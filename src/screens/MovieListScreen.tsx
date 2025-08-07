@@ -11,12 +11,12 @@ import { Movie } from '../types/Movie';
 import { useMovieListViewModel } from '../hooks';
 import SearchBar from '../components/SearchBar';
 import { LoadingState, CategorySelector, MovieGrid } from '../components/MovieList';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types/navigation';
 
-interface MovieListScreenProps {
-    onMoviePress: (movie: Movie) => void;
-}
+type MovieListScreenProps = NativeStackScreenProps<RootStackParamList, 'MovieList'>;
 
-const MovieListScreen: React.FC<MovieListScreenProps> = ({ onMoviePress }) => {
+const MovieListScreen: React.FC<MovieListScreenProps> = ({ navigation }) => {
     const {
         movies,
         loading,
@@ -38,6 +38,10 @@ const MovieListScreen: React.FC<MovieListScreenProps> = ({ onMoviePress }) => {
     useEffect(() => {
         loadMovies(true);
     }, [currentCategory, loadMovies]);
+
+    const handleMoviePress = (movie: Movie) => {
+        navigation.navigate('MovieDetail', { movie });
+    };
 
     return (
         <>
@@ -68,7 +72,7 @@ const MovieListScreen: React.FC<MovieListScreenProps> = ({ onMoviePress }) => {
                             movies={movies}
                             loading={loading}
                             hasMore={hasMore}
-                            onMoviePress={onMoviePress}
+                            onMoviePress={handleMoviePress}
                             onLoadMore={handleLoadMore}
                         />
                     )}

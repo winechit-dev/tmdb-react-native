@@ -12,13 +12,13 @@ import { Movie } from '../types/Movie';
 import { useMovieDetailViewModel } from '../hooks';
 import { BackdropHeader, MovieInfo, BoxOfficeInfo } from '../components/MovieDetail';
 import { LoadingState } from '../components/MovieList';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types/navigation';
 
-interface MovieDetailScreenProps {
-    movie: Movie;
-    onBack: () => void;
-}
+type MovieDetailScreenProps = NativeStackScreenProps<RootStackParamList, 'MovieDetail'>;
 
-const MovieDetailScreen: React.FC<MovieDetailScreenProps> = ({ movie, onBack }) => {
+const MovieDetailScreen: React.FC<MovieDetailScreenProps> = ({ route, navigation }) => {
+    const { movie } = route.params;
     const {
         movieDetails,
         loading,
@@ -30,12 +30,16 @@ const MovieDetailScreen: React.FC<MovieDetailScreenProps> = ({ movie, onBack }) 
     const backdropUrl = getImageUrl(movie.backdrop_path, 'w780');
     const posterUrl = getImageUrl(movie.poster_path, 'w342');
 
+    const handleBack = () => {
+        navigation.goBack();
+    };
+
     if (loading) {
         return (
             <SafeAreaView style={styles.container}>
                 <View style={styles.header}>
-                    <TouchableOpacity style={styles.backButton} onPress={onBack}>
-                        <Text style={styles.backButtonText}>← Back</Text>
+                    <TouchableOpacity style={styles.backButton} onPress={handleBack}>
+                        <Text style={styles.backButtonText}>Back</Text>
                     </TouchableOpacity>
                 </View>
                 <LoadingState message="Loading movie details..." />
@@ -46,7 +50,7 @@ const MovieDetailScreen: React.FC<MovieDetailScreenProps> = ({ movie, onBack }) 
     return (
         <View style={styles.container}>
             <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-                <BackdropHeader backdropUrl={backdropUrl} onBack={onBack} />
+                <BackdropHeader backdropUrl={backdropUrl} onBack={handleBack} />
 
                 <View style={styles.content}>
                     <MovieInfo

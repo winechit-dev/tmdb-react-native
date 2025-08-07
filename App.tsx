@@ -4,38 +4,43 @@
  * @format
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { StatusBar, useColorScheme, Platform, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Movie } from './src/types/Movie';
 import MovieListScreen from './src/screens/MovieListScreen';
 import MovieDetailScreen from './src/screens/MovieDetailScreen';
 import ErrorBoundary from './src/components/ErrorBoundary';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { RootStackParamList } from './src/types/navigation';
+
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
-  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
-
-  const handleMoviePress = (movie: Movie) => {
-    setSelectedMovie(movie);
-  };
-
-  const handleBackPress = () => {
-    setSelectedMovie(null);
-  };
 
   const AppContent = () => (
     <ErrorBoundary>
-      <StatusBar 
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'} 
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={Platform.OS === 'android' ? '#f8f9fa' : 'transparent'}
         translucent={Platform.OS === 'ios'}
       />
-      {selectedMovie ? (
-        <MovieDetailScreen movie={selectedMovie} onBack={handleBackPress} />
-      ) : (
-        <MovieListScreen onMoviePress={handleMoviePress} />
-      )}
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="MovieList"
+            component={MovieListScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="MovieDetail"
+            component={MovieDetailScreen}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </ErrorBoundary>
   );
 
