@@ -37,7 +37,7 @@ const MovieListScreen: React.FC<MovieListScreenProps> = ({ navigation }) => {
 
     useEffect(() => {
         loadMovies(true);
-    }, [currentCategory, loadMovies]);
+    }, [currentCategory]);
 
     const handleMoviePress = (movie: Movie) => {
         navigation.navigate('MovieDetail', { movie });
